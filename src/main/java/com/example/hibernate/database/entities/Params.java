@@ -3,6 +3,7 @@ package com.example.hibernate.database.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.time.OffsetDateTime;
 
@@ -25,12 +26,12 @@ public class Params {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unit_id", referencedColumnName = "id", nullable = false)
     @ToString.Exclude
     private Units unitId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
     private ParamTypes typeId;
 

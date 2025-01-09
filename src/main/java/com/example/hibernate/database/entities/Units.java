@@ -2,6 +2,7 @@ package com.example.hibernate.database.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -18,7 +19,7 @@ public class Units {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
     private UnitTypes type;
 
@@ -26,7 +27,6 @@ public class Units {
     private OffsetDateTime dateReg;
 
     @OneToMany(mappedBy = "unitId", fetch = FetchType.LAZY)
-    @Transient
     private List<Params> params;
 
     @PrePersist

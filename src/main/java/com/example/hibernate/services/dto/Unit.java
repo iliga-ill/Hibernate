@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -17,4 +18,11 @@ public class Unit {
     private Long id;
     private String type;
     private List<Param> params;
+
+    public Unit(Long id, String type) {
+        this.id = id;
+        this.type = type;
+        this.params = new ArrayList<>();
+    }
+
 }
