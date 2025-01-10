@@ -29,6 +29,12 @@ public class Units {
     @OneToMany(mappedBy = "unitId", fetch = FetchType.LAZY)
     private List<Params> params;
 
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
+    private List<Relations> childs;
+
+    @OneToMany(mappedBy = "child", fetch = FetchType.LAZY)
+    private List<Relations> parents;
+
     @PrePersist
     protected void onCreate() {
         this.dateReg = OffsetDateTime.now(); // Устанавливаем текущую дату при создании объекта

@@ -1,6 +1,7 @@
 package com.example.hibernate.database.repositories;
 
 import com.example.hibernate.database.entities.Units;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

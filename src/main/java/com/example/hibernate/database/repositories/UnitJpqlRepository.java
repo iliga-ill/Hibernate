@@ -2,6 +2,7 @@ package com.example.hibernate.database.repositories;
 
 import com.example.hibernate.database.entities.Units;
 import com.example.hibernate.services.dto.Unit;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +20,9 @@ public interface UnitJpqlRepository extends JpaRepository<Units, Long> {
 
     @Query("SELECT u FROM Units u WHERE u.id = :id")
     Units findUnitByIdWithoutEntityGraph(@Param("id") Long unitId);
+
+    @Query("SELECT u FROM Units u WHERE u.id = :id")
+    Slice<Units> findUnitByIdInSlice(@Param("id") Long unitId);
 
     /*
     @Query("""

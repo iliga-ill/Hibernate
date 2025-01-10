@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional(Transactional.TxType.REQUIRED)
 public class TestService {
     private final UnitHibernateSessionApiDAO unitHibernateSessionApiDAO;
     private final UnitCriteriaDAO unitCriteriaDAO;
@@ -58,7 +59,7 @@ public class TestService {
         log.info("");
     }
 
-    @Scheduled(fixedDelay = 100000)
+//    @Scheduled(fixedDelay = 100000)
     @Transactional(Transactional.TxType.REQUIRED)
     public void hibernateSessionApiWithCashL2Query() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -126,6 +127,14 @@ public class TestService {
     @Transactional(Transactional.TxType.REQUIRED)
     public void jpqlRepositoryMethodNamingConventionQueries() {
         var unit = unitJpaDefaultMethodsRepository.findByTypeAlias("unit_1"); //работает без Entity Graph, сильно спамит запросами при подтягивании данных из разных таблиц
+        unitJpaDefaultMethodsRepository.findByTypeAlias("unit_1");
+        entityManager.flush();
+    }
+
+//    @Scheduled(fixedDelay = 100000)
+    @Transactional(Transactional.TxType.REQUIRED)
+    public void jpqlRepositoryMethodNamingConventionQueriesWithSlice() {
+        var unit = unitJpqlRepository.findUnitByIdInSlice(2L); //работает без Entity Graph, сильно спамит запросами при подтягивании данных из разных таблиц
         entityManager.flush();
     }
 

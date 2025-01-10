@@ -1,10 +1,7 @@
 package com.example.hibernate.database.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.OffsetDateTime;
 
@@ -29,10 +26,12 @@ public class Relations {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id", referencedColumnName = "id", nullable = false)
+    @ToString.Exclude
     private Units parent;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "child_id", referencedColumnName = "id", nullable = false)
+    @ToString.Exclude
     private Units child;
 
     @PrePersist
